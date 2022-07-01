@@ -5,3 +5,17 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Movie.destroy_all
+require 'faker'
+
+puts 'Creating 20 fake movies...'
+20.times do
+  movie = Movie.new(
+    title: Faker::Movie.unique.title,
+    overview: Faker::Movie.unique.quote,
+    rating: rand(0..5)
+  )
+  movie.save!
+end
+puts 'Finished!'
